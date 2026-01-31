@@ -1,0 +1,159 @@
+{% extends "base.html" %} {% block content %}
+<!-- Navbar -->
+<nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+  <div class="px-4 md:px-12 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <h1
+        class="text-red-600 text-3xl font-bebas tracking-widest cursor-pointer"
+      >
+        VALENTIFLIX
+      </h1>
+      <div class="hidden md:flex gap-4 text-sm text-gray-200">
+        <a href="#" class="font-bold">Home</a>
+        <a href="#" class="hover:text-gray-400">Series</a>
+        <a href="#" class="hover:text-gray-400">Films</a>
+        <a href="#" class="hover:text-gray-400">My List</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <i data-lucide="search" class="w-5 h-5 cursor-pointer"></i>
+      <i data-lucide="bell" class="w-5 h-5 cursor-pointer"></i>
+      <a href="{{ url_for('profiles') }}">
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"
+          class="w-8 h-8 rounded cursor-pointer"
+        />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="relative h-[70vh] w-full">
+  <!-- Background Video/Image -->
+  <div
+    class="absolute inset-0 w-full h-full bg-cover bg-center"
+    style="background-image: url('{{ featured.image }}'); mask-image: linear-gradient(to bottom, black 80%, transparent 100%);"
+  >
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent"
+    ></div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent"
+    ></div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="absolute bottom-[20%] left-4 md:left-12 max-w-xl space-y-4">
+    <div
+      class="flex items-center gap-2 text-red-600 font-bold tracking-wider text-sm"
+    >
+      <span class="bg-red-600 text-white px-2 py-0.5 rounded-sm text-xs"
+        >TOP 10</span
+      >
+      <span>#1 IN MY HEART</span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+      {{ featured.title }}
+    </h1>
+    <p class="text-lg text-gray-300 drop-shadow-md line-clamp-3">
+      {{ featured.description }}
+    </p>
+    <div class="flex items-center gap-4 mt-4">
+      {% if not featured.locked %}
+      <a
+        href="{{ url_for('watch', ep_id=featured.id) }}"
+        class="bg-white text-black px-6 py-2 rounded font-bold flex items-center gap-2 hover:bg-gray-200 transition"
+      >
+        <i data-lucide="play-fill" class="fill-current"></i> Play
+      </a>
+      {% else %}
+      <button
+        class="bg-gray-500/50 text-white px-6 py-2 rounded font-bold flex items-center gap-2 cursor-not-allowed"
+      >
+        <i data-lucide="lock"></i> Locked
+      </button>
+      {% endif %}
+      <button
+        class="bg-gray-500/70 text-white px-6 py-2 rounded font-bold flex items-center gap-2 hover:bg-gray-500/90 transition"
+      >
+        <i data-lucide="info"></i> More Info
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Rows -->
+<div class="pl-4 md:pl-12 pb-12 -mt-10 relative z-10">
+  <h3 class="text-xl font-bold mb-2 text-gray-200 hover:text-white transition">
+    Valentine Week Episodes
+  </h3>
+
+  <div class="flex overflow-x-auto gap-2 pb-8 scrollbar-hide">
+    {% for item in content %}
+    <a
+      href="{{ url_for('watch', ep_id=item.id) if not item.locked else '#' }}"
+      class="relative flex-none w-64 aspect-video rounded-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:z-20 cursor-pointer group {{ 'grayscale opacity-60' if item.locked else '' }}"
+    >
+      <img src="{{ item.image }}" class="w-full h-full object-cover" />
+
+      <!-- Hover Overlay -->
+      <div
+        class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4"
+      >
+        <h4 class="font-bold text-sm">{{ item.title }}</h4>
+        <div class="text-xs text-green-400 font-bold mb-1">98% Match</div>
+        <div class="flex items-center gap-2">
+          <div
+            class="border border-gray-400 rounded-full p-1 hover:border-white"
+          >
+            <i
+              data-lucide="{{ 'lock' if item.locked else 'play' }}"
+              class="w-3 h-3"
+            ></i>
+          </div>
+          {% if item.locked %}
+          <span class="text-xs text-red-500">Unlocks {{ item.date }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Lock Icon for Locked items (always visible) -->
+      {% if item.locked %}
+      <div class="absolute top-2 right-2 bg-black/50 p-1 rounded-full">
+        <i data-lucide="lock" class="w-4 h-4 text-white"></i>
+      </div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  <!-- Second Row (Memories) -->
+  <h3 class="text-xl font-bold mb-2 mt-8 text-gray-200">
+    Because You Watched "Our Story"
+  </h3>
+  <div class="flex overflow-x-auto gap-2 pb-8 scrollbar-hide">
+    <!-- Mock Data for visual fill -->
+    <div
+      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
+    >
+      Memory 1
+    </div>
+    <div
+      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
+    >
+      Memory 2
+    </div>
+    <div
+      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
+    >
+      Memory 3
+    </div>
+    <div
+      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
+    >
+      Memory 4
+    </div>
+  </div>
+</div>
+{% endblock %}

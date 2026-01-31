@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<div
+  class="h-screen w-full flex items-center justify-center bg-cover bg-center"
+  style="
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+      url(&quot;https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08648f/US-en-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg&quot;);
+  "
+>
+  <div class="absolute top-6 left-6">
+    <h1 class="text-red-600 text-5xl font-bebas tracking-widest">
+      VALENTIFLIX
+    </h1>
+  </div>
+
+  <div class="bg-black/75 p-12 rounded-lg w-full max-w-md">
+    <h2 class="text-3xl font-bold mb-8">Sign In</h2>
+    <form action="{{ url_for('login') }}" method="POST" class="space-y-6">
+      <div>
+        <input
+          type="text"
+          name="username"
+          placeholder="Who holds the key? (love)"
+          class="w-full bg-[#333] rounded px-4 py-3 border-none text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+        />
+      </div>
+      <div>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password (you)"
+          class="w-full bg-[#333] rounded px-4 py-3 border-none text-white focus:outline-none focus:ring-2 focus:ring-red-600"
+        />
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded transition duration-200"
+      >
+        Sign In
+      </button>
+    </form>
+    <div class="mt-4 text-gray-400 text-sm">
+      New to Valentiflix?
+      <span class="text-white hover:underline cursor-pointer"
+        >You're the only subscriber.</span
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}
