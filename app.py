@@ -132,6 +132,58 @@ CONTENT_DATA = [
     }
 ]
 
+# Memories Data
+MEMORIES_DATA = [
+    {
+        "key": "siliguri",
+        "title": "Siliguri",
+        "description": "Where we met and our love blossomed",
+        "poetic_lines": "In the city of tea and timber,\nOur souls found a reason to remember.\nThe chaos of streets faded away,\nLeaving only us, night and day.",
+        "thumbnail": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/siliguri.mp4"
+    },
+    {
+        "key": "islampur",
+        "title": "Islampur",
+        "description": "Your hometown, where you risked to meet...",
+        "poetic_lines": "A hometown secret, a risk you took,\nWritten in destiny's own book.\nTo see you smile was worth the mile,\nA memory kept in my heart's file.",
+        "thumbnail": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/islampur.mp4"
+    },
+    {
+        "key": "kolkata",
+        "title": "Kolkata",
+        "description": "Place where you came for me to see and make me feel...",
+        "poetic_lines": "The City of Joy, where you came for me,\nA love as deep as the endless sea.\nYou made me feel what words can't say,\nA sunrise on my darkest day.",
+        "thumbnail": "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/kolkata.mp4"
+    },
+    {
+        "key": "mandarmani",
+        "title": "Mandarmani",
+        "description": "Your first trip to a beach",
+        "poetic_lines": "Waves crashing at our feet,\nA melody of love, soft and sweet.\nThe sand, the sea, and your hand in mine,\nA moment frozen in endless time.",
+        "thumbnail": "https://images.unsplash.com/photo-1559570278-eb8d71d06403?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/mandarmani.mp4"
+    },
+    {
+        "key": "darjeeling",
+        "title": "Darjeeling",
+        "description": "First trip to a cold place",
+        "poetic_lines": "Amidst the mist and mountain air,\nI found a warmth beyond compare.\nThe cold was sharp, but you were near,\nChasing away every doubt and fear.",
+        "thumbnail": "https://images.unsplash.com/photo-1516575150278-77136aed6920?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/darjeeling.mp4"
+    },
+    {
+        "key": "manifestation",
+        "title": "Manifestation",
+        "description": "Our endless trips to the world in future, In Sha Allah",
+        "poetic_lines": "A map of dreams we have yet to trace,\nEvery corner of the world, every space.\nHand in hand, we'll roam the earth,\nA love that's proved its endless worth.",
+        "thumbnail": "https://images.unsplash.com/photo-1517677130602-23a321cf7b98?auto=format&fit=crop&w=800&q=80",
+        "video_src": "static/videos/memories/manifestation.mp4"
+    }
+]
+
 # Trivia Questions
 TRIVIA_DATA = {
     "rose": [
@@ -237,7 +289,7 @@ def browse():
     # Feature the first unlocked item, or the last one if all unlocked
     featured = next((item for item in reversed(content) if not item['locked']), content[0])
     
-    return render_template('browse.html', content=content, featured=featured)
+    return render_template('browse.html', content=content, featured=featured, memories=MEMORIES_DATA)
 
 @app.route('/watch/<ep_id>')
 def watch(ep_id):
