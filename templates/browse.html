@@ -133,27 +133,95 @@
     Because You Watched "Our Story"
   </h3>
   <div class="flex overflow-x-auto gap-2 pb-8 scrollbar-hide">
-    <!-- Mock Data for visual fill -->
+    {% for memory in memories %}
     <div
-      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
+      class="relative flex-none w-64 aspect-video rounded-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:z-20 cursor-pointer group memory-card"
+      data-video-src="{{ memory.video_src }}"
     >
-      Memory 1
+      <img src="{{ memory.thumbnail }}" class="w-full h-full object-cover" />
+
+      <!-- Hover Overlay -->
+      <div
+        class="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4"
+      >
+        <h4 class="font-bold text-sm text-white">{{ memory.title }}</h4>
+        <p class="text-[10px] text-gray-300 italic line-clamp-2 leading-tight mt-1">
+            {{ memory.poetic_lines }}
+        </p>
+        <div class="flex items-center gap-2 mt-2">
+           <div class="bg-white text-black rounded-full p-1.5 hover:bg-gray-200 transition">
+             <i data-lucide="play" class="w-3 h-3 fill-current"></i>
+           </div>
+           <span class="text-xs font-bold text-gray-200">Play Video</span>
+        </div>
+      </div>
     </div>
-    <div
-      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
-    >
-      Memory 2
-    </div>
-    <div
-      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
-    >
-      Memory 3
-    </div>
-    <div
-      class="flex-none w-64 aspect-video bg-gray-800 rounded-md flex items-center justify-center text-gray-600"
-    >
-      Memory 4
-    </div>
+    {% endfor %}
   </div>
 </div>
+
+<!-- Video Overlay Player -->
+<div id="videoOverlay" class="fixed inset-0 z-[60] bg-black hidden flex-col items-center justify-center">
+    <!-- Close Button -->
+    <button id="closeVideoBtn" class="absolute top-4 right-4 z-50 text-white hover:text-gray-300 bg-black/50 rounded-full p-2 transition">
+        <i data-lucide="x" class="w-8 h-8"></i>
+    </button>
+
+    <!-- Video Element -->
+    <div class="w-full h-full relative">
+        <video id="memoryVideo" class="w-full h-full object-contain" controls>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const overlay = document.getElementById('videoOverlay');
+        const video = document.getElementById('memoryVideo');
+        const closeBtn = document.getElementById('closeVideoBtn');
+        const cards = document.querySelectorAll('.memory-card');
+
+        // Open Video
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const videoSrc = card.getAttribute('data-video-src');
+                if (videoSrc) {
+                    video.src = videoSrc;
+                    overlay.classList.remove('hidden');
+                    overlay.classList.add('flex');
+                    video.play().catch(e => console.log("Autoplay blocked:", e));
+                }
+            });
+        });
+
+        // Close Video Function
+        const closeVideo = () => {
+            overlay.classList.add('hidden');
+            overlay.classList.remove('flex');
+            video.pause();
+            video.currentTime = 0;
+            video.src = ""; // Stop buffering
+        };
+
+        // Close Button Click
+        closeBtn.addEventListener('click', closeVideo);
+
+        // Close on Overlay Click (outside video)
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeVideo();
+            }
+        });
+
+        // Close on Esc Key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+                closeVideo();
+            }
+        });
+    });
+</script>
+
 {% endblock %}
