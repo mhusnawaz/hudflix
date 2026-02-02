@@ -11,6 +11,8 @@ app.secret_key = Config.SECRET_KEY
 # Set this to False to enforce real dates. Set to True to see everything now.
 # DEV_MODE is now loaded from Config
 
+print(f"❤️  VALENTIFLIX STARTING... DEV_MODE={Config.DEV_MODE}")
+
 # Users
 USERS = {
     Config.ADMIN_USERNAME: generate_password_hash(Config.ADMIN_PASSWORD)
@@ -228,6 +230,11 @@ TRIVIA_DATA = {
         {"q": "What does 'X' stand for in XOXO?", "options": ["Hugs", "Kisses", "Love", "No"], "correct": 1}
     ]
 }
+
+# --- CONTEXT PROCESSORS ---
+@app.context_processor
+def inject_globals():
+    return dict(dev_mode=Config.DEV_MODE)
 
 # --- HELPERS ---
 def get_content_status():
