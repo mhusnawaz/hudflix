@@ -29,7 +29,7 @@ def test_valentiflix_flow(page: Page):
     page.goto("http://127.0.0.1:5000/watch/rose")
 
     # Verify Watch Page Elements
-    expect(page.locator("h1")).to_contain_text("The Red Rose")
+    expect(page.locator("h1").filter(has_text="The Red Rose")).to_be_visible()
     expect(page.locator("button:has-text('Watch Episode')")).to_be_visible()
     expect(page.locator("button:has-text('Daily Trivia')")).to_be_visible()
 
