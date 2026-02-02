@@ -142,7 +142,7 @@
     {% for memory in memories %}
     <div
       class="relative flex-none w-64 aspect-video rounded-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:z-20 cursor-pointer group memory-card"
-      data-video-src="{{ memory.video_src }}"
+      data-video-url="{{ memory.video_url }}"
     >
       <img src="{{ memory.thumbnail }}" class="w-full h-full object-cover" />
 
@@ -175,7 +175,7 @@
 
     <!-- Video Element -->
     <div class="w-full h-full relative">
-        <video id="memoryVideo" class="w-full h-full object-contain" controls>
+        <video id="memoryVideo" class="w-full h-full object-contain" controls preload="metadata">
             <source src="" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -192,7 +192,7 @@
         // Open Video
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                const videoSrc = card.getAttribute('data-video-src');
+                const videoSrc = card.getAttribute('data-video-url');
                 if (videoSrc) {
                     video.src = videoSrc;
                     overlay.classList.remove('hidden');
