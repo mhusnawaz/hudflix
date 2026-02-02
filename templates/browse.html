@@ -67,18 +67,24 @@
       >
         <i data-lucide="play-fill" class="fill-current"></i> Play
       </a>
+      <a
+        href="{{ url_for('watch', ep_id=featured.id) }}"
+        class="bg-gray-500/70 text-white px-6 py-2 rounded font-bold flex items-center gap-2 hover:bg-gray-500/90 transition"
+      >
+        <i data-lucide="info"></i> More Info
+      </a>
       {% else %}
       <button
         class="bg-gray-500/50 text-white px-6 py-2 rounded font-bold flex items-center gap-2 cursor-not-allowed"
       >
         <i data-lucide="lock"></i> Locked
       </button>
-      {% endif %}
       <button
-        class="bg-gray-500/70 text-white px-6 py-2 rounded font-bold flex items-center gap-2 hover:bg-gray-500/90 transition"
+        class="bg-gray-500/50 text-white px-6 py-2 rounded font-bold flex items-center gap-2 cursor-not-allowed"
       >
         <i data-lucide="info"></i> More Info
       </button>
+      {% endif %}
     </div>
   </div>
 </div>
