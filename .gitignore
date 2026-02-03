@@ -4,3 +4,4 @@ static/sfx/.DS_Store
 .env
 __pycache__/
 *.pyc
+myenv/

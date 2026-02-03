@@ -23,14 +23,14 @@ USERS = {
 CONTENT_DATA = [
     {
         "id": "rose",
-        "date": "2026-02-07",
+        "date": "2026-02-03",
         "title": "Ep 1: The Red Rose",
         "subtitle": "Rose Day Special",
         "description": "Like a rose, you bring color and fragrance to my life. A small start to a big week.",
         "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
         "memory_text": "Remember when we first met? I knew then that life would be rosier with you.",
         "secret_answer": "rose",
-        "video_url": "https://www.youtube.com/watch?v=SAz5dqeWzyk&list=RDSAz5dqeWzyk&start_radio=1",
+        "video_url": "https://res.cloudinary.com/dv7n9hqvk/video/upload/v1770103008/samples/dance-2.mp4",
         "sound_file": "rose.mp3",
         "effect_type": "floating_roses",
         "surprise_type": "rose_bouquet"
