@@ -44,7 +44,7 @@ CONTENT_DATA = [
         "image": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80",
         "memory_text": "If I had to ask you a thousand times, I would choose you every single time.",
         "secret_answer": "yes",
-        "video_url": "https://www.youtube.com/watch?v=SAz5dqeWzyk",
+        "video_url": "https://res.cloudinary.com/dv7n9hqvk/video/upload/v1770103008/samples/dance-2.mp4",
         "sound_file": "propose.mp3",
         "effect_type": "cinematic_glow",
         "surprise_type": "propose_card"
